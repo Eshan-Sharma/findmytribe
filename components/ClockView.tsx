@@ -81,9 +81,11 @@ export default function ClockView() {
                 />
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Badge className="brutal-badge cursor-pointer inline-flex items-center gap-2">
-                      {tz.members} member{tz.members !== 1 ? "s" : ""}
-                    </Badge>
+                    <div className="flex justify-center">
+                      <Badge className="brutal-badge cursor-pointer inline-flex items-center gap-2">
+                        {tz.members} member{tz.members !== 1 ? "s" : ""}
+                      </Badge>
+                    </div>
                   </DialogTrigger>
                   <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto brutal-dialog bg-pink-100 border-4 border-black">
                     <DialogHeader className="pb-6">

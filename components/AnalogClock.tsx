@@ -16,8 +16,10 @@ export default function AnalogClock({
   className = "",
 }: AnalogClockProps) {
   const [time, setTime] = useState<Date>(new Date());
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const updateTime = () => {
       const now = new Date();
       // Get time in the specified timezone
@@ -31,6 +33,91 @@ export default function AnalogClock({
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, [timezone]);
+
+  // Prevent hydration mismatch by not rendering clock hands until mounted
+  if (!mounted) {
+    return (
+      <div className={`flex flex-col items-center ${className}`}>
+        <div className="relative">
+          <svg width={size} height={size} className="bg-pink-100">
+            {/* Clock face - single circle */}
+            <circle
+              cx={(size / 2).toString()}
+              cy={(size / 2).toString()}
+              r={(size / 2 - 8).toString()}
+              fill="#fce7f3"
+              stroke="#000000"
+              strokeWidth="4"
+            />
+
+            {/* Hour markers */}
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => {
+              const angle = i * 30 - 90;
+              const x1 = Math.round(
+                size / 2 + (size / 2 - 15) * Math.cos((angle * Math.PI) / 180)
+              );
+              const y1 = Math.round(
+                size / 2 + (size / 2 - 15) * Math.sin((angle * Math.PI) / 180)
+              );
+              const x2 = Math.round(
+                size / 2 + (size / 2 - 25) * Math.cos((angle * Math.PI) / 180)
+              );
+              const y2 = Math.round(
+                size / 2 + (size / 2 - 25) * Math.sin((angle * Math.PI) / 180)
+              );
+
+              return (
+                <line
+                  key={i}
+                  x1={x1.toString()}
+                  y1={y1.toString()}
+                  x2={x2.toString()}
+                  y2={y2.toString()}
+                  stroke="#000000"
+                  strokeWidth="2"
+                />
+              );
+            })}
+
+            {/* Numbers */}
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((number) => {
+              const angle = number * 30 - 90;
+              const x = Math.round(
+                size / 2 + (size / 2 - 35) * Math.cos((angle * Math.PI) / 180)
+              );
+              const y = Math.round(
+                size / 2 + (size / 2 - 35) * Math.sin((angle * Math.PI) / 180)
+              );
+
+              return (
+                <text
+                  key={number}
+                  x={x.toString()}
+                  y={y.toString()}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fontSize="12"
+                  fontWeight="bold"
+                  fill="#000000"
+                  fontFamily="'Press Start 2P', cursive"
+                >
+                  {number}
+                </text>
+              );
+            })}
+
+            {/* Center dot */}
+            <circle
+              cx={(size / 2).toString()}
+              cy={(size / 2).toString()}
+              r="8"
+              fill="#000000"
+            />
+          </svg>
+        </div>
+      </div>
+    );
+  }
 
   const hours = time.getHours() % 12;
   const minutes = time.getMinutes();

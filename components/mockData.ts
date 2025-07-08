@@ -122,15 +122,30 @@ export const mockMembers = [
 ];
 
 export const timezones = [
-  { name: "PST", time: "10:30 AM", members: 1 },
-  { name: "GMT", time: "6:30 PM", members: 1 },
-  { name: "CET", time: "7:30 PM", members: 2 },
-  { name: "JST", time: "3:30 AM", members: 1 },
-  { name: "KST", time: "3:30 AM", members: 1 },
-  { name: "IST", time: "11:00 PM", members: 1 },
-  { name: "AEST", time: "5:00 AM", members: 1 },
-  { name: "EET", time: "8:00 PM", members: 1 },
-  { name: "BRT", time: "3:30 PM", members: 1 },
+  {
+    name: "PST",
+    timezone: "America/Los_Angeles",
+    label: "Pacific Time",
+    members: 1,
+  },
+  { name: "GMT", timezone: "Europe/London", label: "London", members: 1 },
+  {
+    name: "CET",
+    timezone: "Europe/Madrid",
+    label: "Central Europe",
+    members: 2,
+  },
+  { name: "JST", timezone: "Asia/Tokyo", label: "Tokyo", members: 1 },
+  { name: "KST", timezone: "Asia/Seoul", label: "Seoul", members: 1 },
+  { name: "IST", timezone: "Asia/Kolkata", label: "India", members: 1 },
+  { name: "AEST", timezone: "Australia/Sydney", label: "Sydney", members: 1 },
+  {
+    name: "EET",
+    timezone: "Europe/Athens",
+    label: "Eastern Europe",
+    members: 1,
+  },
+  { name: "BRT", timezone: "America/Sao_Paulo", label: "Brazil", members: 1 },
 ];
 
 export const countries = [

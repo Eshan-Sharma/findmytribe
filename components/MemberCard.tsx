@@ -30,59 +30,63 @@ export default function MemberCard({ member }: { member: Member }) {
 
   return (
     <Card
-      className="border border-black cursor-pointer hover:bg-gray-50 transition-colors"
+      className="brutal-card bg-pink-100 cursor-pointer group"
       onClick={() => setExpanded(!expanded)}
     >
-      <CardContent className="p-4">
+      <CardContent className="p-5">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-sm font-medium">
-              {member.name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
+          <div className="flex items-center gap-4">
+            <div className="brutal-avatar w-12 h-12 flex items-center justify-center text-xl bg-pink-200">
+              {member.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <div className="font-medium text-black">{member.name}</div>
-              <div className="text-sm text-gray-600">@{member.username}</div>
+              <div className="font-black text-gray-800 text-lg">
+                {member.name}
+              </div>
+              <div className="text-sm font-bold text-pink-600">
+                @{member.username}
+              </div>
             </div>
           </div>
-          {expanded ? (
-            <ChevronUp className="w-4 h-4" />
-          ) : (
-            <ChevronDown className="w-4 h-4" />
-          )}
+          <div className="bg-pink-200 rounded-full p-2 border-2 border-black">
+            {expanded ? (
+              <ChevronUp className="w-5 h-5 text-black" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-black" />
+            )}
+          </div>
         </div>
 
         {expanded && (
-          <div className="mt-4 pt-4 border-t border-gray-200 space-y-3">
+          <div className="mt-5 pt-5 border-t-4 border-dashed border-pink-300 space-y-4">
             {member.organization && (
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-gray-600" />
-                <span className="text-sm">{member.organization}</span>
+              <div className="flex items-center gap-3 bg-pink-100 p-3 rounded-2xl border-2 border-black">
+                <span className="font-bold text-black">
+                  {member.organization}
+                </span>
               </div>
             )}
-            <div className="flex items-center gap-2">
-              <Globe className="w-4 h-4 text-gray-600" />
-              <span className="text-sm">
+            <div className="flex items-center gap-3 bg-pink-100 p-3 rounded-2xl border-2 border-black">
+              <span className="font-bold text-black">
                 {member.city}, {member.country}
               </span>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-gray-600" />
-              <span className="text-sm">{member.timezone}</span>
+            <div className="flex items-center gap-3 bg-pink-100 p-3 rounded-2xl border-2 border-black">
+              <span className="font-bold text-black">{member.timezone}</span>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-3 flex-wrap">
               {member.discordId && (
-                <div className="flex items-center gap-1">
-                  <MessageCircle className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm">{member.discordId}</span>
+                <div className="flex items-center gap-2 bg-pink-100 px-4 py-2 rounded-full border-2 border-black">
+                  <span className="font-bold text-black text-sm">
+                    {member.discordId}
+                  </span>
                 </div>
               )}
               {member.twitterHandle && (
-                <div className="flex items-center gap-1">
-                  <Twitter className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm">{member.twitterHandle}</span>
+                <div className="flex items-center gap-2 bg-pink-100 px-4 py-2 rounded-full border-2 border-black">
+                  <span className="font-bold text-black text-sm">
+                    {member.twitterHandle}
+                  </span>
                 </div>
               )}
             </div>

@@ -15,52 +15,48 @@ export default function FindMyTribe() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-stone-50">
       <Header />
 
-      <nav className="border-b border-black flex">
+      <nav className="border-b-4 border-black bg-pink-100 flex">
         <Button
-          variant={activeView === "clock" ? "default" : "ghost"}
-          className={`rounded-none border-r border-black ${
-            activeView === "clock"
-              ? "bg-black text-white"
-              : "text-black hover:bg-gray-100"
+          variant="ghost"
+          className={`brutal-nav-button border-r-4 border-black ${
+            activeView === "clock" ? "active" : ""
           }`}
           onClick={() => setActiveView("clock")}
         >
-          <Clock className="w-4 h-4 mr-2" />
-          Clock View
+          <Clock className="w-5 h-5 mr-3" />
+          <span className="font-bold">Time Zones</span>
         </Button>
         <Button
-          variant={activeView === "list" ? "default" : "ghost"}
-          className={`rounded-none border-r border-black ${
-            activeView === "list"
-              ? "bg-black text-white"
-              : "text-black hover:bg-gray-100"
+          variant="ghost"
+          className={`brutal-nav-button border-r-4 border-black ${
+            activeView === "list" ? "active" : ""
           }`}
           onClick={() => setActiveView("list")}
         >
-          <List className="w-4 h-4 mr-2" />
-          List View
+          <List className="w-5 h-5 mr-3" />
+          <span className="font-bold">By Location</span>
         </Button>
         <Button
-          variant={activeView === "map" ? "default" : "ghost"}
-          className={`rounded-none ${
-            activeView === "map"
-              ? "bg-black text-white"
-              : "text-black hover:bg-gray-100"
+          variant="ghost"
+          className={`brutal-nav-button ${
+            activeView === "map" ? "active" : ""
           }`}
           onClick={() => setActiveView("map")}
         >
-          <Map className="w-4 h-4 mr-2" />
-          Map View
+          <Map className="w-5 h-5 mr-3" />
+          <span className="font-bold">World Map</span>
         </Button>
       </nav>
 
-      <main className="container mx-auto px-4 py-8">
-        {activeView === "clock" && <ClockView />}
-        {activeView === "list" && <ListView />}
-        {activeView === "map" && <MapView />}
+      <main className="container mx-auto px-8 py-12">
+        <div className="brutal-card bg-stone-100 p-10 mb-8">
+          {activeView === "clock" && <ClockView />}
+          {activeView === "list" && <ListView />}
+          {activeView === "map" && <MapView />}
+        </div>
       </main>
 
       <Footer />
